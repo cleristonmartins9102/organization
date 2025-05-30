@@ -21,7 +21,10 @@ model Company {
   addressId      Int         @unique
   fullName       String
   shortName      String
-  registrationNumber String  @unique
+  registerNumber String  @unique
+  email String  
+  countryDialCode String  
+  phone String  
   vatNumber      String?
   location       Location     @relation(fields: [addressId], references: [id])
   organization   Organization @relation(fields: [organizationId], references: [id])
@@ -52,10 +55,11 @@ model Location {
 model Store {
   id              Int      @id @default(autoincrement())
   addressId       Int      @unique
-  companyId       Int      @unique
+  companyId       Int      
   name            String
   countryDialCode String
   phone           String
+  email           String
   location        Location @relation(fields: [addressId], references: [id])
   company         Company      @relation(fields: [companyId], references: [id])
   users           User[]    @relation("UserStores")

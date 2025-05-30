@@ -1,4 +1,7 @@
 export * from './create-partner-repository'
 export * from './get-organization-byid-repository'
 export * from './create-company-repository'
+export * from './get-company-byid-repository'
 export * from './create-company'
+export * from './create-store'
+export * from './create-store-repository'

@@ -23,12 +23,15 @@ export class MysqlOrganizationRepository implements CreateOrganizationRepository
           lng: organizationData.company.store.location.coordenates.lon
         }
       })
-
+      
       const company = await tx.company.create({
         data: {
           fullName: organizationData.company.fullName,
           shortName: organizationData.company.shorName,
-          registrationNumber: organizationData.company.cnpj,
+          registerNumber: organizationData.company.registerNumber,
+          email: organizationData.company.email,
+          countryDialCode: organizationData.company.countryDialCode,
+          phone: organizationData.company.phone,
           addressId: companyLocation.id,
           organizationId: organization.id
         }
@@ -58,6 +61,7 @@ export class MysqlOrganizationRepository implements CreateOrganizationRepository
             connect: { id: storeLocation.id}
           },
           name: organizationData.company.store.name,
+          email: organizationData.company.store.email,
           countryDialCode: organizationData.company.store.countryDialCode,
           phone: organizationData.company.store.phone
         }

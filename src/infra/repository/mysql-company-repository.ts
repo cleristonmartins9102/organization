@@ -1,5 +1,5 @@
 import { CompanyAlreadyExistsError } from "@/application/errors/errors";
-import { CreateCompanyRepository } from "@/data/domain/features";
+import { CreateCompanyRepository, GetCompanyByidRepository } from "@/data/domain/features";
 import { CompanyModel, CreateCompanyModel } from "@/data/domain/models";
 import { Prisma, PrismaClient } from "@prisma/client";
 
@@ -11,8 +11,11 @@ export class MysqlCompanyRepository implements CreateCompanyRepository {
       const company = await tx.company.create({
         data: {
           fullName: companyData.fullName,
-          registrationNumber: companyData.registrationNumber,
+          registerNumber: companyData.registrationNumber,
           shortName: companyData.shortName,
+          email: companyData.email,
+          countryDialCode: companyData.countryDialCode,
+          phone: companyData.phone,
           organization: {
             connect: { id: Number(companyData.organizationId) }
           },

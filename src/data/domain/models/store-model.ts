@@ -1,17 +1,14 @@
-export class StoreModel {
+import { LocationModel } from "./location-model"
+
+export class CreateStoreModel {
+    companyId!: string
     name!: string
     countryDialCode!: string
     phone!: string
-    location!: {
-      address: string
-      number: string
-      zipCode: string
-      countryCode: string
-      country: string
-      city: string
-      coordenates: {
-        lon: string
-        lat: string
-      }
-    }
+    email!: string
+    location!: LocationModel
+}
+export class StoreModel extends CreateStoreModel {
+    id!: string
+    createdAt!: string
 }

@@ -7,7 +7,7 @@ import { AsyncScope } from "@/application/hooks/async-scope";
 export const createCompanyRouter = (router: Router) => {
   const middleware = (req: any, res: any, next: any) => {
     const scope = new AsyncScope(() => {
-      storage.currentUser.set({ organizationId: 1 })
+      storage.currentUser.set({ organizationId: 2 })
       next()
     })
   }

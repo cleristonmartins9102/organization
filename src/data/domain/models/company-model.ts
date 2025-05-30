@@ -5,6 +5,9 @@ export class CreateCompanyModel {
   organizationId?: string
   fullName!: string
   shortName!: string
+  email!: string
+  countryDialCode!: string
+  phone!: string
   registrationNumber!: string
   location!: LocationModel
 }

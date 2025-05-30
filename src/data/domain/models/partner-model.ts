@@ -3,12 +3,16 @@ export class CreateOrganizationModel {
   company!: {
     fullName: string
     shorName: string
-    cnpj: string
+    registerNumber: string
     location?: Location
+    email: string
+    countryDialCode: string
+    phone: string
     store: {
       name: string
       countryDialCode: string
       phone: string
+      email: string
       location: {
         address: string
         number: string
