@@ -1,16 +1,26 @@
 {
-  "name": "partners",
+  "name": "organization",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "ts-node-dev src/main/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/module-alias": "^2.0.4",
+    "prisma": "^6.8.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@cleriston.marina/validator": "^1.0.1",
+    "@prisma/client": "^6.8.2",
+    "@prisma/extension-accelerate": "^2.0.1",
+    "express": "^5.1.0",
+    "module-alias": "^2.2.3"
   }
 }

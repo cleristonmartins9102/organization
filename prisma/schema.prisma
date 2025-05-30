@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  company   Company[]
+  user      User?
+}
+
+model Company {
+  id             Int   @id @default(autoincrement())
+  organizationId Int
+  addressId      Int          @unique
+  fullName       String
+  shortName      String
+  registrationId String
+  vatNumber      String?
+  location       Location     @relation(fields: [addressId], references: [id])
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  user           User?
+  store          Store[]
+
+  @@index([organizationId], map: "Company_organizationId_fkey")
+}
+
+model Location {
+  id          Int   @id @default(autoincrement())
+  address     String
+  number      String
+  complement  String?
+  zipCode     String
+  countryCode String
+  country     String
+  city        String
+  lat         String
+  lon         String
+  company     Company?
+  store       Store?
+  user        User?
+}
+
+
+
+model Store {
+  id              Int      @id @default(autoincrement())
+  addressId       Int      @unique
+  companyId       Int      @unique
+  name            String
+  countryDialCode String
+  phone           String
+  location        Location @relation(fields: [addressId], references: [id])
+  company         Company      @relation(fields: [companyId], references: [id])
+  users           User[]    @relation("UserStores")
+}
+
+model User {
+  id             Int          @id @default(autoincrement())
+  addressId      Int          @unique
+  organizationId Int          @unique
+  companyId      Int          @unique
+  firstName      String
+  lastName       String
+  email          String       @unique
+  role           User_role
+  company        Company?      @relation(fields: [companyId], references: [id])
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  stores         Store[]       @relation("UserStores")
+  location       Location?     @relation(fields: [addressId], references: [id])
+}
+
+enum User_role {
+  owner
+  operator
+  user
+}
