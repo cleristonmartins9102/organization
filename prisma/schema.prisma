@@ -18,10 +18,10 @@ model Organization {
 model Company {
   id             Int   @id @default(autoincrement())
   organizationId Int
-  addressId      Int          @unique
+  addressId      Int         @unique
   fullName       String
   shortName      String
-  registrationId String
+  registrationNumber String  @unique
   vatNumber      String?
   location       Location     @relation(fields: [addressId], references: [id])
   organization   Organization @relation(fields: [organizationId], references: [id])
@@ -41,7 +41,7 @@ model Location {
   country     String
   city        String
   lat         String
-  lon         String
+  lng         String
   company     Company?
   store       Store?
   user        User?

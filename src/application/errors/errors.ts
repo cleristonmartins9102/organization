@@ -17,9 +17,15 @@ export class ExpiredTokenError extends Error {
     this.name = 'ExpiredTokenError'
   }
 }
+export class CompanyAlreadyExistsError extends Error {
+  constructor (fieldName: string) {
+    super(`Company already exists with ${fieldName}`)
+    this.name = 'CompanyAlreadyExistsError'
+  }
+}
 export class CredentialsNotFoundError extends Error {
-  constructor (fieldName: string, value: string) {
-    super(`Cresdentials not found with ${fieldName} ${value}`)
+  constructor (fieldName: string) {
+    super(`Cresdentials not found with ${fieldName}`)
     this.name = 'CredentialsNotFoundError'
   }
 }

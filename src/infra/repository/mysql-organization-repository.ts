@@ -1,9 +1,9 @@
-import { CreateOrganizationRepository } from "@/data/domain/features";
+import { CreateOrganizationRepository, GetOrganizationByidRepository } from "@/data/domain/features";
 import { CreateOrganizationModel, OrganizationModel } from "@/data/domain/models";
 import { PrismaClient, Prisma } from "@prisma/client";
 import { createOrganization } from "./create-organization";
 
-export class MysqlOrganizationRepository implements CreateOrganizationRepository {
+export class MysqlOrganizationRepository implements CreateOrganizationRepository, GetOrganizationByidRepository {
   constructor(private readonly connection: PrismaClient) { }
   async create(organizationData: CreateOrganizationModel): Promise<OrganizationModel> {
     const response = await this.connection.$transaction(async (tx) => {
@@ -20,7 +20,7 @@ export class MysqlOrganizationRepository implements CreateOrganizationRepository
           country: organizationData.company.store.location.country,
           city: organizationData.company.store.location.city,
           lat: organizationData.company.store.location.coordenates.lat,
-          lon: organizationData.company.store.location.coordenates.lon
+          lng: organizationData.company.store.location.coordenates.lon
         }
       })
 
@@ -28,7 +28,7 @@ export class MysqlOrganizationRepository implements CreateOrganizationRepository
         data: {
           fullName: organizationData.company.fullName,
           shortName: organizationData.company.shorName,
-          registrationId: organizationData.company.cnpj,
+          registrationNumber: organizationData.company.cnpj,
           addressId: companyLocation.id,
           organizationId: organization.id
         }
@@ -43,7 +43,7 @@ export class MysqlOrganizationRepository implements CreateOrganizationRepository
           country: organizationData.company.store.location.country,
           city: organizationData.company.store.location.city,
           lat: organizationData.company.store.location.coordenates.lat,
-          lon: organizationData.company.store.location.coordenates.lon
+          lng: organizationData.company.store.location.coordenates.lon
         }
       })
 
@@ -72,7 +72,7 @@ export class MysqlOrganizationRepository implements CreateOrganizationRepository
           country: organizationData.company.store.location.country,
           city: organizationData.company.store.location.city,
           lat: organizationData.company.store.location.coordenates.lat,
-          lon: organizationData.company.store.location.coordenates.lon
+          lng: organizationData.company.store.location.coordenates.lon
         }
       })
 
@@ -100,5 +100,9 @@ export class MysqlOrganizationRepository implements CreateOrganizationRepository
     })
 
     return response as any
+  }
+
+  async getById(id: string): Promise<OrganizationModel> {
+    return {} as any
   }
 }
