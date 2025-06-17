@@ -1,7 +1,7 @@
 import { LocationModel, StoreModel } from "./"
 
 export class CreateCompanyModel {
-  id!: string
+  id?: string
   organizationId?: string
   fullName!: string
   shortName!: string

@@ -5,7 +5,7 @@ export abstract class Controller<B = any,R = any,P = any,Q = any> {
   abstract perform (httpRequest: HttpRequest<B,P,Q>): Promise<HttpResponse<R>>
   async handler (httpRequest: HttpRequest<B,P,Q>): Promise<HttpResponse<R>> {
     const validator: Contracts.Validation = this.buildValidator()
-    const { success, error }: any = validator.validate(httpRequest.body)
+    const { success, error }: any = validator.validate(httpRequest.body ?? {})
     if (!success) return badRequest(error) as any
     return await this.perform(httpRequest)
   }

@@ -1,10 +1,12 @@
+import { LocationModel } from "./location-model"
+
 export class CreateOrganizationModel {
   name!: string
   company!: {
     fullName: string
     shorName: string
     registerNumber: string
-    location?: Location
+    location?: LocationModel
     email: string
     countryDialCode: string
     phone: string
@@ -21,16 +23,11 @@ export class CreateOrganizationModel {
         country: string
         city: string
         coordenates: {
-          lon: string
-          lat: string
+          lng: number
+          lat: number
         }
       }
     }
-  }
-  owner!: {
-    firstName: string
-    lastName: string
-    email: string
   }
 }
 

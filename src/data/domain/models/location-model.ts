@@ -7,7 +7,7 @@ export class LocationModel {
   country!: string
   city!: string
   coordenates!: {
-    lng: string
-    lat: string
+    lng: number
+    lat: number
   }
 }

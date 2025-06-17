@@ -6,5 +6,5 @@ import { createApp } from "./config/app";
 
 process.env.SECRET_KEY = '123456'
 const app = createApp()
-const port = 5050
+const port = 5053
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`))
